@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
         //basic version that cares only about whether the shift key is held
         Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
-        if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && primaryConnection && Input.GetButton("Split"))
+        if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetButton("Split"))
         {
             rb.velocity += dir1;
         }
