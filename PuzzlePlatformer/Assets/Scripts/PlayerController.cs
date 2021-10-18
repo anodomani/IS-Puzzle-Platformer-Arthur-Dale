@@ -153,6 +153,8 @@ public class PlayerController : MonoBehaviour
         //referenced https://answers.unity.com/questions/444761/move-rigidbody-to-a-specific-position.html
         //auto adjust position of non-primary avatars
         /*
+         * version that cares about primary by proxy
+         * 
         Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
         if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && primaryConnection || primaryByProxy)
         {
@@ -160,6 +162,9 @@ public class PlayerController : MonoBehaviour
         }
         */
 
+        /*
+         * version where pull is different when within pull range
+         * 
         Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
         if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetButton("Split"))
         {
@@ -179,8 +184,15 @@ public class PlayerController : MonoBehaviour
                 //print("in range");
             }
         }
-        
-        
+        */
+
+        //basic version that cares only about whether the shift key is held
+        Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
+        if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && primaryConnection && Input.GetButton("Split"))
+        {
+            rb.velocity += dir1;
+        }
+
         //up to ascend for primary avatar
         if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetAxisRaw("Vertical") > 0)
         {
