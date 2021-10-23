@@ -13,8 +13,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject primaryAvatarSpawned;
 
     //gameplay variables
-    public bool grounded;
-    public float groundedAvatarMin;
+    //public bool grounded;
+    //public float groundedAvatarMin;
 
     public Vector3 primaryAdjustedPosition;
     public Vector3 autoAdjustedPosition;
@@ -78,7 +78,7 @@ public class PlayerManager : MonoBehaviour
             newG.name = "Avatar " + avatars.Count;
         }
     }
-
+    /*
     void CheckForGrounded()
     {
         int numberOfAvatarsGrounded = 0;
@@ -99,14 +99,15 @@ public class PlayerManager : MonoBehaviour
 
         print("grounded 2 " + grounded);
     }
+    */
 
     public void QuickRespawn()
     {
         //respawns an avatar and resets some aspects of it
         var moveToFirst = avatars[avatars.Count - 1];
         PlayerController playerController = moveToFirst.GetComponent<PlayerController>();
-        playerController.primaryByProxy = false;
-        playerController.primaryConnection = false;
+        //playerController.primaryByProxy = false;
+        //playerController.primaryConnection = false;
         moveToFirst.transform.position = transform.position;
         avatars.RemoveAt(avatars.Count - 1);
         avatars.Insert(0, moveToFirst);

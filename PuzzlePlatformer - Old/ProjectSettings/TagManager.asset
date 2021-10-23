@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - ground
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - AvatarPrimary
+  - AvatarSecondary
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Far BG
+    uniqueID: 2927296763
+    locked: 0
+  - name: Background
+    uniqueID: 1442800325
+    locked: 0
+  - name: Player
+    uniqueID: 2887604629
+    locked: 0
+  - name: Physics Object
+    uniqueID: 4011929633
+    locked: 0
+  - name: Liquid
+    uniqueID: 3699233485
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 580303209
+    locked: 0
