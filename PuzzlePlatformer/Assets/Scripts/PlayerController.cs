@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -91,9 +92,9 @@ public class PlayerController : MonoBehaviour
         transform.position = transform.parent.position;
     }
 }
+*/
 
 
-/*
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -246,165 +247,165 @@ public class PlayerController : MonoBehaviour
         }
         */
 
-//referenced https://answers.unity.com/questions/444761/move-rigidbody-to-a-specific-position.html
-//auto adjust position of non-primary avatars
-/*
- * version that cares about primary by proxy
- * 
-Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
-if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && primaryConnection || primaryByProxy)
-{
-    rb.velocity += dir1;
-}
-*/
-
-/*
- * version where pull is different when within pull range
- * 
-Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
-if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetButton("Split"))
-{
-    //print(Vector2.Distance(transform.position, PrimaryAvatarBehaviour.Instance.primaryAvatar.transform.position));
-    if (Mathf.Abs(Vector2.Distance(transform.position, PrimaryAvatarBehaviour.Instance.primaryAvatar.transform.position)) > 0)
-    {
-        if (Mathf.Abs(outOfRangePullStrength - Vector2.Distance(transform.position, PrimaryAvatarBehaviour.Instance.primaryAvatar.transform.position)) > 0) { dir1 = (new Vector2(outOfRangePullStrength, outOfRangePullStrength) * dir1.normalized) - (new Vector2(Vector2.Distance(transform.position, PrimaryAvatarBehaviour.Instance.primaryAvatar.transform.position), 0) * dir1.normalized); }
-        else { dir1 = new Vector2(0, 0); }
-        print("wabbo");
-        rb.velocity += dir1;
-        //print("out of range");
-    }
-    else
-    {
-        if (dir1.magnitude < 15) { rb.velocity += dir1; }
-        else { rb.velocity += (dir1).normalized * 15; }
-        //print("in range");
-    }
-}
-*/
-/*
-//basic version that cares only about whether the shift key is held
-Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
-if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetButton("Split"))
-{
-    rb.velocity += dir1;
-}
-
-//up to ascend for primary avatar
-if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetAxisRaw("Vertical") > 0)
-{
-    if (groundHitLong.collider)
-    {
-        rb.velocity += Vector2.up * (maxRiseRate);
-        lerp = groundControl;
-        mat.friction = 1;
-        jumpTicksCurrent -= 1 + Time.fixedDeltaTime;
-    }
-
-    if (currentRiseRate < maxRiseRate)
-    {
-        currentRiseRate++;
-    }
-
-    if (primaryByProxy)
-    {
-        //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + (Vector2.up.y * (currentRiseRate * 0.1f)));
-        groundedByProxy = true;
-        primaryByProxy = false;
-    }
-    else if (currentRiseRate > 0) { currentRiseRate = 0; }
-
-}
-
-//jumping if grounded
-if (Input.GetButton("Jump"))
-{
-    if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
-    {
-        if (grounded || groundedByProxy || jumpTicksCurrent > 0)
+        //referenced https://answers.unity.com/questions/444761/move-rigidbody-to-a-specific-position.html
+        //auto adjust position of non-primary avatars
+        /*
+         * version that cares about primary by proxy
+         * 
+        Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
+        if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && primaryConnection || primaryByProxy)
         {
-            rb.velocity += Vector2.up * (jumpSpeed);
+            rb.velocity += dir1;
+        }
+        */
+
+        /*
+         * version where pull is different when within pull range
+         * 
+        Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
+        if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetButton("Split"))
+        {
+            //print(Vector2.Distance(transform.position, PrimaryAvatarBehaviour.Instance.primaryAvatar.transform.position));
+            if (Mathf.Abs(Vector2.Distance(transform.position, PrimaryAvatarBehaviour.Instance.primaryAvatar.transform.position)) > 0)
+            {
+                if (Mathf.Abs(outOfRangePullStrength - Vector2.Distance(transform.position, PrimaryAvatarBehaviour.Instance.primaryAvatar.transform.position)) > 0) { dir1 = (new Vector2(outOfRangePullStrength, outOfRangePullStrength) * dir1.normalized) - (new Vector2(Vector2.Distance(transform.position, PrimaryAvatarBehaviour.Instance.primaryAvatar.transform.position), 0) * dir1.normalized); }
+                else { dir1 = new Vector2(0, 0); }
+                print("wabbo");
+                rb.velocity += dir1;
+                //print("out of range");
+            }
+            else
+            {
+                if (dir1.magnitude < 15) { rb.velocity += dir1; }
+                else { rb.velocity += (dir1).normalized * 15; }
+                //print("in range");
+            }
+        }
+        */
+        /*
+        //basic version that cares only about whether the shift key is held
+        Vector2 dir1 = new Vector2(playerManager.autoAdjustedPosition.x - transform.position.x, 0).normalized * Mathf.Abs(transform.position.x - playerManager.autoAdjustedPosition.x);
+        if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetButton("Split"))
+        {
+            rb.velocity += dir1;
+        }
+
+        //up to ascend for primary avatar
+        if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar && Input.GetAxisRaw("Vertical") > 0)
+        {
+            if (groundHitLong.collider)
+            {
+                rb.velocity += Vector2.up * (maxRiseRate);
+                lerp = groundControl;
+                mat.friction = 1;
+                jumpTicksCurrent -= 1 + Time.fixedDeltaTime;
+            }
+
+            if (currentRiseRate < maxRiseRate)
+            {
+                currentRiseRate++;
+            }
+
+            if (primaryByProxy)
+            {
+                //rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y + (Vector2.up.y * (currentRiseRate * 0.1f)));
+                groundedByProxy = true;
+                primaryByProxy = false;
+            }
+            else if (currentRiseRate > 0) { currentRiseRate = 0; }
+
+        }
+        */
+
+        //jumping if grounded
+        if (Input.GetButton("Jump"))
+        {
+            if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
+            {
+                if (grounded /*|| groundedByProxy || jumpTicksCurrent > 0*/)
+                {
+                    rb.velocity += Vector2.up * (jumpSpeed);
+                    lerp = groundControl;
+                    mat.friction = 1;
+                    jumpTicksCurrent -= 1 + Time.fixedDeltaTime;
+                }
+                else if (groundedByProxy && groundHitLong.collider)
+                {
+                    rb.velocity += Vector2.up * (jumpSpeed * 0.2f);
+                    lerp = groundControl;
+                    mat.friction = 1;
+                    jumpTicksCurrent -= 1 + Time.fixedDeltaTime;
+                }
+            }
+            else
+            {
+                if (grounded /*|| groundedByProxy || jumpTicksCurrent > 0*/)
+                {
+                    rb.velocity += Vector2.up * (jumpSpeed);
+                    lerp = groundControl;
+                    mat.friction = 1;
+                    jumpTicksCurrent -= 1 + Time.fixedDeltaTime;
+                }
+            }
+        }
+
+        /*
+        if (groundHit) // grounded
+        {
             lerp = groundControl;
             mat.friction = 1;
-            jumpTicksCurrent -= 1 + Time.fixedDeltaTime;
+            if (Input.GetButtonDown("Jump")) { rb.velocity += Vector2.up * jumpSpeed; }
         }
-        else if (groundedByProxy && groundHitLong.collider)
+        */
+    }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        PlayerController playerController = null;
+
+        if (other.collider.GetComponent<PlayerController>() != null)
         {
-            rb.velocity += Vector2.up * (jumpSpeed * 0.2f);
-            lerp = groundControl;
-            mat.friction = 1;
-            jumpTicksCurrent -= 1 + Time.fixedDeltaTime;
+            playerController = other.collider.GetComponent<PlayerController>();
+            //makes an inactive avatar active and adds it to the active avatars list
+            if (!playerController.controllable && controllable)
+            {
+                playerController.playerManager = PrimaryAvatarBehaviour.Instance.playerManager;
+                playerController.playerManager.avatars.Add(other.gameObject);
+                playerController.controllable = true;
+            }
+            //checks if an avatar is connected to the primary avatar or an avatar that is touching it by proxy
+            if (other.gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
+            {
+                primaryConnection = true;
+            }
+            if (playerController.primaryConnection || playerController.primaryByProxy)
+            {
+                primaryByProxy = true;
+            }
         }
-    }
-    else
-    {
-        if (grounded || groundedByProxy || jumpTicksCurrent > 0)
-        {
-            rb.velocity += Vector2.up * (jumpSpeed);
-            lerp = groundControl;
-            mat.friction = 1;
-            jumpTicksCurrent -= 1 + Time.fixedDeltaTime;
-        }
-    }
-}
 
-
-if (groundHit) // grounded
-{
-    lerp = groundControl;
-    mat.friction = 1;
-    if (Input.GetButtonDown("Jump")) { rb.velocity += Vector2.up * jumpSpeed; }
-}
-}
-
-void OnCollisionStay2D(Collision2D other)
-{
-PlayerController playerController = null;
-
-if (other.collider.GetComponent<PlayerController>() != null)
-{
-    playerController = other.collider.GetComponent<PlayerController>();
-    //makes an inactive avatar active and adds it to the active avatars list
-    if (!playerController.controllable && controllable)
-    {
-        playerController.playerManager = PrimaryAvatarBehaviour.Instance.playerManager;
-        playerController.playerManager.avatars.Add(other.gameObject);
-        playerController.controllable = true;
-    }
-    //checks if an avatar is connected to the primary avatar or an avatar that is touching it by proxy
-    if (other.gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
-    {
-        primaryConnection = true;
-    }
-    if (playerController.primaryConnection || playerController.primaryByProxy)
-    {
-        primaryByProxy = true;
-    }
-}
-
-/*
-if (groundHit.collider && groundHit.collider.tag == "Player" && groundHit.collider.gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar)
-{
-    groundedByProxy = true;      
-}
-
-
-if (!Input.GetButton("Jump"))
-{  
-    if (groundHit.collider && groundHit.collider.tag == "ground")
-    {
-        groundedTag = groundHit.collider.tag;
-        grounded = true;
-        jumpTicksCurrent = jumpTicksMax;
-    }
-    else if (playerController != null && other.gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar)
-    {
-        if (playerController.grounded || playerController.groundedByProxy)
+        if (groundHit.collider && groundHit.collider.tag == "Player" && groundHit.collider.gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar)
         {
             groundedByProxy = true;
-            jumpTicksCurrent = jumpTicksMax;
         }
-    }   
+
+
+        if (!Input.GetButton("Jump"))
+        {
+            if (groundHit.collider && groundHit.collider.tag == "ground")
+            {
+                groundedTag = groundHit.collider.tag;
+                grounded = true;
+                jumpTicksCurrent = jumpTicksMax;
+            }
+            else if (playerController != null && other.gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar)
+            {
+                if (playerController.grounded || playerController.groundedByProxy)
+                {
+                    groundedByProxy = true;
+                    jumpTicksCurrent = jumpTicksMax;
+                }
+            }
+        }
+    }
 }
-}
-}
-*/

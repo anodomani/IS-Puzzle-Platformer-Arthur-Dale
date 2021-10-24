@@ -99,9 +99,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hideCursor: 1
   pullRange: 1000
+  outOfRangePullStrength: 0
   randomScalerValue: 0.4
   speed: 100
-  jumpSpeed: 7
+  jumpSpeed: 25
   gravityScale: 8
   airControl: 3
   groundControl: 10
