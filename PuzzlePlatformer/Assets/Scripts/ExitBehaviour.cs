@@ -24,10 +24,6 @@ public class ExitBehaviour : MonoBehaviour
             reload = true;
             Load();
         }
-        if (allowedToSwitchScenes)
-        {
-            Invoke("Load", delay);
-        }
     }
 
     public void Load()
@@ -55,7 +51,7 @@ public class ExitBehaviour : MonoBehaviour
             {
                 textLevelDescription.text = levelCompleteText;
                 PrimaryAvatarBehaviour.Instance.playerManager.mainAvatarRespawn = false;
-                Load();
+                Invoke("Load", delay);
             }
             //PlayerController playerController = other.GetComponent<PlayerController>();
             //playerController.Respawn();
@@ -78,10 +74,5 @@ public class ExitBehaviour : MonoBehaviour
         {
             playerController.playerManager.QuickRespawn();
         }
-    }
-
-    public void AllowSceneSwitching()
-    {
-        allowedToSwitchScenes = true;
     }
 }

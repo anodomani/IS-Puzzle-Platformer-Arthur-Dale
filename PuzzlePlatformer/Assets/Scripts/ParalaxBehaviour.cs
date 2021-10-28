@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ParalaxBehaviour : MonoBehaviour
 {
+    public bool scaleWithCamera;
     private Vector2 dimensions;
     private Vector2 startPos;
     public float parallaxEffect;

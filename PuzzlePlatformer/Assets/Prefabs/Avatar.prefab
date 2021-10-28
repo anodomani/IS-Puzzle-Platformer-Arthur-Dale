@@ -101,8 +101,8 @@ MonoBehaviour:
   pullRange: 1000
   outOfRangePullStrength: 0
   randomScalerValue: 0.4
-  speed: 100
-  jumpSpeed: 25
+  speed: 110
+  jumpSpeed: 30
   gravityScale: 8
   airControl: 3
   groundControl: 10
@@ -120,6 +120,7 @@ MonoBehaviour:
   maxRiseRate: 2
   controllable: 0
   playerManager: {fileID: 0}
+  animate: {fileID: 0}
 --- !u!50 &339460982157810098
 Rigidbody2D:
   serializedVersion: 4

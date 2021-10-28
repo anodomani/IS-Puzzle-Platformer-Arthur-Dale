@@ -40,7 +40,7 @@ public class PlayerManager : MonoBehaviour
         //if there are less avatars than the chosen amount to spawn, spawns avatars
         for (int i = 0; i < avatars.Count; i++) 
         {
-            if (mainAvatarRespawn && PrimaryAvatarBehaviour.Instance == null)
+            if (primaryObject != null && mainAvatarRespawn && PrimaryAvatarBehaviour.Instance == null)
             {
                 GameObject newG;
                 newG = Instantiate(primaryObject, new Vector2(transform.position.x, transform.position.y), Quaternion.identity, transform);
