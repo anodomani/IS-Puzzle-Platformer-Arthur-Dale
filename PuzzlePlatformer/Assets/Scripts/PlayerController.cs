@@ -94,7 +94,6 @@ public class PlayerController : MonoBehaviour
 }
 */
 
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -171,7 +170,6 @@ public class PlayerController : MonoBehaviour
         {
             Respawn();
         }
-
         if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
         {
             Animate();
