@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3718914669122122589}
   - component: {fileID: 3718914669122122588}
   - component: {fileID: 1556929246}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Seesaw
   m_TagString: ground
   m_Icon: {fileID: 0}

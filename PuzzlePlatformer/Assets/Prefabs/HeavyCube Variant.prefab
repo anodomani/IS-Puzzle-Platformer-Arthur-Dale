@@ -32,6 +32,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeavyCube Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2491677182278407529, guid: 3d9b1328905c2044bb78c68129bee903,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2491677182278407572, guid: 3d9b1328905c2044bb78c68129bee903,
         type: 3}
       propertyPath: m_RootOrder

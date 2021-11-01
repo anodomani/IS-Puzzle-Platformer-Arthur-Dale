@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     public int avatarAmount;
     public int avatarsSpawnedAtATime;
     public List<GameObject> avatars = new List<GameObject>();
-    public GameObject primaryAvatarSpawned;
+    private List<SecondaryMovementController> avatarsMovementControllers = new List<SecondaryMovementController>();
 
     //gameplay variables
     //public bool grounded;
@@ -19,20 +19,6 @@ public class PlayerManager : MonoBehaviour
     public Vector3 primaryAdjustedPosition;
     public Vector3 autoAdjustedPosition;
     public bool mainAvatarRespawn = true;
-
-
-    void Start()
-    {
-        //spawns in the primary avatar
-        if (primaryObject != null && mainAvatarRespawn && PrimaryAvatarBehaviour.Instance == null)
-        {
-            GameObject newG;
-            newG = Instantiate(primaryObject, new Vector2(transform.position.x, transform.position.y), Quaternion.identity, transform);
-            avatars.Add(newG);
-            newG.name = "Primary Avatar";
-            primaryAvatarSpawned = newG;
-        }
-    }
 
     // Update is called once per frame
     void Update()
@@ -45,15 +31,9 @@ public class PlayerManager : MonoBehaviour
                 GameObject newG;
                 newG = Instantiate(primaryObject, new Vector2(transform.position.x, transform.position.y), Quaternion.identity, transform);
                 avatars.Add(newG);
+                avatarsMovementControllers.Add(newG.GetComponent<SecondaryMovementController>());
                 newG.name = "Primary Avatar";
-                primaryAvatarSpawned = newG;
 
-                break;
-            }
-            if (avatars[i] == PrimaryAvatarBehaviour.Instance.primaryAvatar)
-            {
-                autoAdjustedPosition = avatars[i].transform.position;
-                //primaryAdjustedPosition = AutoAdjustPosition();
                 break;
             }
         }
@@ -63,6 +43,14 @@ public class PlayerManager : MonoBehaviour
         if (avatars.Count < avatarAmount) { populate(avatarsSpawnedAtATime); }
         if (Input.GetAxisRaw("QuickRespawn") != 0) { QuickRespawn(); }
         //CheckForGrounded();
+    }
+
+    public void UpdateAvatars(float h, bool jump)
+    {
+        for (int i = 0; i < avatars.Count; i++)
+        {
+            avatarsMovementControllers[i].Update_(h, jump);
+        }
     }
 
     void populate(int timesToTrigger)
@@ -75,6 +63,7 @@ public class PlayerManager : MonoBehaviour
             GameObject newG;
             newG = Instantiate(genObject, new Vector2(transform.position.x + positionRand, transform.position.y + positionRand), Quaternion.identity, transform);
             avatars.Add(newG);
+            avatarsMovementControllers.Add(newG.GetComponent<SecondaryMovementController>());
             newG.name = "Avatar " + avatars.Count;
         }
     }

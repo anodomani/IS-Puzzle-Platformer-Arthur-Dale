@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 339460982157810109}
   - component: {fileID: 339460982157810108}
-  - component: {fileID: 339460982157810099}
   - component: {fileID: 339460982157810098}
   - component: {fileID: -1492767126641689414}
+  - component: {fileID: -2757436792823135087}
   m_Layer: 9
   m_Name: Avatar
   m_TagString: Player
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 339460982157810096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 578460501129334780}
   m_Father: {fileID: 0}
@@ -85,42 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &339460982157810099
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 339460982157810096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 190af923ceb92c84c9343669ea478ac4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hideCursor: 1
-  pullRange: 1000
-  outOfRangePullStrength: 0
-  randomScalerValue: 0.4
-  speed: 110
-  jumpSpeed: 30
-  gravityScale: 8
-  airControl: 3
-  groundControl: 10
-  maxSpeed: 40
-  respawnPoint: -50
-  jumpTicksMax: 8
-  jumpTicksCurrent: 0
-  grounded: 0
-  groundedByProxy: 0
-  primaryConnection: 0
-  primaryByProxy: 0
-  groundedTag: 
-  jumpUnificationLerp: 0.1
-  currentRiseRate: 0
-  maxRiseRate: 2
-  controllable: 0
-  playerManager: {fileID: 0}
-  animate: {fileID: 0}
 --- !u!50 &339460982157810098
 Rigidbody2D:
   serializedVersion: 4
@@ -157,7 +121,23 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.15
+--- !u!114 &-2757436792823135087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339460982157810096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1727d75e83696942a81027b2c73b7cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideCursor: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1518322445838901982
 GameObject:
   m_ObjectHideFlags: 0

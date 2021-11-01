@@ -1,6 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4343815102090748743
+--- !u!70 &71903753814954208
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965408859231430046}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
+--- !u!114 &2415984417447207063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,27 +25,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 965408859231430046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e3a679a92959741bae76859657ca10, type: 3}
+  m_Script: {fileID: 11500000, guid: ee32da5d195c3304ea2073c21c582fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  primaryAvatar: {fileID: 0}
-  playerManager: {fileID: 0}
---- !u!70 &7276663155419540842
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072212115902750448}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.5, y: 4}
-  m_Direction: 0
+  hideCursor: 1
+  mask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!95 &2345120385871666861
 Animator:
   serializedVersion: 3
@@ -133,6 +135,11 @@ PrefabInstance:
       propertyPath: animate
       value: 
       objectReference: {fileID: 541206389242609079}
+    - target: {fileID: 339460982157810099, guid: 009ef70fd78d3724d950ef7de79cb6c3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 339460982157810099, guid: 009ef70fd78d3724d950ef7de79cb6c3,
         type: 3}
       propertyPath: pullRange
@@ -250,8 +257,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 578460501129334780, guid: 009ef70fd78d3724d950ef7de79cb6c3,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 578460501129334780, guid: 009ef70fd78d3724d950ef7de79cb6c3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 578460501129334780, guid: 009ef70fd78d3724d950ef7de79cb6c3,
+        type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 1518322445838901982, guid: 009ef70fd78d3724d950ef7de79cb6c3,
         type: 3}
@@ -309,7 +326,9 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 339460982157810099, guid: 009ef70fd78d3724d950ef7de79cb6c3, type: 3}
+    - {fileID: -1492767126641689414, guid: 009ef70fd78d3724d950ef7de79cb6c3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 009ef70fd78d3724d950ef7de79cb6c3, type: 3}
 --- !u!1 &965408859231430046 stripped
 GameObject:

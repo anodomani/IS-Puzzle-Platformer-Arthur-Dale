@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2491677182278407574}
   - component: {fileID: 1612005073217168757}
   - component: {fileID: 1612005073217168761}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MoveCube
   m_TagString: ground
   m_Icon: {fileID: 0}
