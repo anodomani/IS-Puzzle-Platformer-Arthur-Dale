@@ -267,6 +267,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Avatar Primary
       objectReference: {fileID: 0}
+    - target: {fileID: 5793966752785332415, guid: 645f2b27a28c45b4695b70f263bbd4eb,
+        type: 3}
+      propertyPath: maskGround.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793966752785332415, guid: 645f2b27a28c45b4695b70f263bbd4eb,
+        type: 3}
+      propertyPath: maskPlayer.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 645f2b27a28c45b4695b70f263bbd4eb, type: 3}
 --- !u!1001 &1450826178
@@ -414,6 +424,11 @@ PrefabInstance:
         type: 3}
       propertyPath: avatarAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541079790110250163, guid: 662da1296f220e040aa64ecc6112b099,
+        type: 3}
+      propertyPath: avatarsSpawnedAtATime
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1541079790110250164, guid: 662da1296f220e040aa64ecc6112b099,
         type: 3}

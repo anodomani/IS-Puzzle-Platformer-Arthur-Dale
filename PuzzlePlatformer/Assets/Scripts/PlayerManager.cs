@@ -24,23 +24,13 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         //if there are less avatars than the chosen amount to spawn, spawns avatars
-        for (int i = 0; i < avatars.Count; i++) 
+        if (avatars.Count < avatarAmount) 
         {
-            if (primaryObject != null && mainAvatarRespawn && PrimaryAvatarBehaviour.Instance == null)
-            {
-                GameObject newG;
-                newG = Instantiate(primaryObject, new Vector2(transform.position.x, transform.position.y), Quaternion.identity, transform);
-                avatars.Add(newG);
-                avatarsMovementControllers.Add(newG.GetComponent<SecondaryMovementController>());
-                newG.name = "Primary Avatar";
-
-                break;
-            }
+            populate(avatarsSpawnedAtATime);
         }
         
         //spawn in avatars when there are less than the max ammount
-        
-        if (avatars.Count < avatarAmount) { populate(avatarsSpawnedAtATime); }
+      
         if (Input.GetAxisRaw("QuickRespawn") != 0) { QuickRespawn(); }
         //CheckForGrounded();
     }

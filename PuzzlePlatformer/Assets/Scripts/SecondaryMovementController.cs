@@ -6,7 +6,8 @@ using UnityEngine;
 public class SecondaryMovementController : MonoBehaviour
 {
     public bool hideCursor = true;
-    public LayerMask mask = 1;
+    public LayerMask maskGround = 1;
+    public LayerMask maskPlayer = 1;
 
     const float speed = 15;
     const float jumpSpeed = 25;
@@ -16,9 +17,10 @@ public class SecondaryMovementController : MonoBehaviour
     const float maxSpeed = 40;
 
     float h, flip, velocityX, lerp;
+    bool active = false;
     Vector2 velocity;
     Vector3 flipScale = new Vector3();
-    RaycastHit2D groundHit;
+    RaycastHit2D groundHit, checkForActiveNearby;
     Rigidbody2D rb;
     PhysicsMaterial2D mat;
     SpriteRenderer spriteRenderer;
@@ -35,6 +37,8 @@ public class SecondaryMovementController : MonoBehaviour
         rb.sharedMaterial = mat;
         spriteRenderer = GetComponent<SpriteRenderer>();
         Cursor.visible = !hideCursor;
+
+        InvokeRepeating("Clock", 1, 0.1f);
     }
 
     // Start is called before the first frame update
@@ -44,16 +48,17 @@ public class SecondaryMovementController : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Update_(float h, bool jump)
+    public void Update_(float hNew, bool jumpNew)
     {
-        print("Updating");
+        print("updating");
+        h = hNew;
         lerp = airControl; // air control
         mat.friction = 0;
         if (groundHit) // grounded
         {
             lerp = groundControl;
             mat.friction = 1;
-            if (jump) { rb.velocity += Vector2.up * jumpSpeed; }
+            if (jumpNew) { rb.velocity += Vector2.up * jumpSpeed; }
         }
 
         // flip sprite
@@ -65,7 +70,7 @@ public class SecondaryMovementController : MonoBehaviour
     
     void FixedUpdate()
     {
-        groundHit = Physics2D.CircleCast(rb.position + new Vector2(0, 0.4f), 0.4f, Vector2.down, 0.1f, mask.value);
+        groundHit = Physics2D.CircleCast(rb.position + new Vector2(0, 0.4f), 0.4f, Vector2.down, 0.1f, maskGround.value);
 
         //if (Physics2D.Linecast(rb.position - Vector2.right * 0.7f, rb.position + Vector2.right * 0.7f, mask.value)) { h *= 0.2f; }
 
@@ -76,7 +81,7 @@ public class SecondaryMovementController : MonoBehaviour
 
         if (groundHit)
         {
-            print(groundHit);
+            //print(groundHit);
             Rigidbody2D r = groundHit.collider.GetComponentInParent<Rigidbody2D>();
             if (r != null) { rb.AddForceAtPosition(r.velocity * 0.5f, groundHit.point, ForceMode2D.Force); } // stick to stuffs
         }
@@ -85,5 +90,15 @@ public class SecondaryMovementController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0.3f, 0), 0.4f);
+        Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0, 0), 0.8f);
+    }
+
+    void Clock()
+    {
+        if (!active)
+        {
+            checkForActiveNearby = Physics2D.CircleCast(rb.position, 0.8f, Vector2.down, 0, maskPlayer.value);
+            if (checkForActiveNearby) { active = true; }
+        }
     }
 }

@@ -135,9 +135,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hideCursor: 1
-  mask:
+  maskGround:
     serializedVersion: 2
     m_Bits: 1024
+  maskPlayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &1518322445838901982
 GameObject:
   m_ObjectHideFlags: 0
