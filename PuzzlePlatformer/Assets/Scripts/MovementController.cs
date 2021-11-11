@@ -22,7 +22,8 @@ public class MovementController : MonoBehaviour
     float h, flip, velocityX, lerp;
     Vector2 velocity;
     Vector3 flipScale = new Vector3();
-    RaycastHit2D groundHit, checkForActiveNearby;
+    Collider2D groundHit;
+    RaycastHit2D checkForActiveNearby;
     Rigidbody2D rb;
     PhysicsMaterial2D mat;
     SpriteRenderer spriteRenderer;
@@ -32,7 +33,7 @@ public class MovementController : MonoBehaviour
 
     void Awake()
     {
-        Time.fixedDeltaTime = 1 / 100f;
+        //Time.fixedDeltaTime = 1 / 100f;
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = gravityScale;
         mat = new PhysicsMaterial2D();
@@ -40,7 +41,7 @@ public class MovementController : MonoBehaviour
         rb.sharedMaterial = mat;
         spriteRenderer = GetComponent<SpriteRenderer>();
         Cursor.visible = !hideCursor;
-        InvokeRepeating("Clock", 1, 0.1f);
+        InvokeRepeating("Clock", Random.Range(0f, 1f), 0.1f);
     }
 
     // Start is called before the first frame update
@@ -63,7 +64,7 @@ public class MovementController : MonoBehaviour
             h = hNew;
             var interrupt = Input.GetButton("Split");
             var jump = jumpNew;
-            
+
             if (primaryAvatar && interrupt) { h = 0; }
             lerp = airControl; // air control
             mat.friction = 0;
@@ -80,7 +81,7 @@ public class MovementController : MonoBehaviour
                 spriteRenderer.flipX = h < 0f;
             }
 
-            if (canAnimate) 
+            if (canAnimate)
             {
                 if (Input.GetButton("Split")) { animate.PlayAnimation("Focus"); }
                 else if (groundHit && h != 0) { animate.PlayAnimation("Run"); }
@@ -89,11 +90,11 @@ public class MovementController : MonoBehaviour
             }
         }
     }
-    
+
     void FixedUpdate()
     {
-        groundHit = Physics2D.CircleCast(rb.position + new Vector2(0, 0.4f), 0.4f, Vector2.down, 0.2f, maskGround.value);
-        checkForActiveNearby = Physics2D.CircleCast(rb.position + new Vector2(0, 0), 3f, Vector2.up, 0.1f, maskPlayer.value);
+        groundHit = Physics2D.OverlapCircle(rb.position + new Vector2(0, 0.4f), 0.4f, maskGround.value);
+
         //if (Physics2D.Linecast(rb.position - Vector2.right * 0.7f, rb.position + Vector2.right * 0.7f, mask.value)) { h *= 0.2f; }
 
         velocity.Set((velocityX = Mathf.Lerp(velocityX, h, Time.deltaTime * lerp)) * speed, rb.velocity.y);
@@ -101,12 +102,12 @@ public class MovementController : MonoBehaviour
 
         rb.velocity = Vector2.ClampMagnitude(rb.velocity, maxSpeed);
 
-        if (groundHit)
-        {
-            //print(groundHit);
-            Rigidbody2D r = groundHit.collider.GetComponentInParent<Rigidbody2D>();
-            if (r != null) { rb.AddForceAtPosition(r.velocity * 0.5f, groundHit.point, ForceMode2D.Force); } // stick to stuffs
-        }
+        //if (groundHit)
+        //{
+        //    //print(groundHit);
+        //    Rigidbody2D r = groundHit.GetComponentInParent<Rigidbody2D>();
+        //    if (r != null) { rb.AddForceAtPosition(r.velocity * 0.5f, groundHit.point, ForceMode2D.Force); } // stick to stuffs
+        //}
     }
 
     void OnDrawGizmos()
@@ -117,11 +118,12 @@ public class MovementController : MonoBehaviour
 
     void Clock()
     {
+        checkForActiveNearby = Physics2D.CircleCast(rb.position + new Vector2(0, 0), 3f, Vector2.up, 0.1f, maskPlayer.value);
         if (!active)
         {
-            if (checkForActiveNearby.collider != null && checkForActiveNearby.collider.GetComponent<MovementController>().active) 
+            if (checkForActiveNearby.collider != null && checkForActiveNearby.collider.GetComponent<MovementController>().active)
             {
-                active = true; 
+                active = true;
                 PlayerManager.Instance.avatars.Add(gameObject);
                 PlayerManager.Instance.avatarsMovementControllers.Add(gameObject.GetComponent<MovementController>());
             }
