@@ -52,7 +52,7 @@ public class ExitBehaviour : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0, 0), 2.5f);
     }
 
-    void OnTriggerEnter2D(Collision2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         AddToContents(other.gameObject);
     }
@@ -67,6 +67,7 @@ public class ExitBehaviour : MonoBehaviour
             PlayerManager.Instance.avatarsMovementControllers.Remove(other.GetComponent<MovementController>());
             //playerController.playerManager.avatars.Remove(other.gameObject);
             Destroy(other.gameObject);
+            Load();
         }
         else
         {
