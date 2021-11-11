@@ -96,10 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a3fdb955d5aa543bab3fa6a71daa10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followTarget: {fileID: 0}
   playerManager: {fileID: 0}
   lerpRateMove: 0.2
   lerpRateZoom: 0.05
   zoomMin: 30
   zoomMax: 75
-  zoomRate: 0.8
+  zoomScale: 1

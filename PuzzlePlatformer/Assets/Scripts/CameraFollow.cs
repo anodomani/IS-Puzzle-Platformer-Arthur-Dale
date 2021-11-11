@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public GameObject followTarget;
     public PlayerManager playerManager;
     public float lerpRateMove;
     public float lerpRateZoom;
     public float zoomMin;
     public float zoomMax;
-    public float zoomRate;
+    public float zoomScale;
     Camera camera;
 
     // Start is called before the first frame update
     void Start()
     {
         camera = GetComponent<Camera>();
-        playerManager = followTarget.GetComponent<PlayerManager>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     void FixedUpdate()
@@ -40,6 +33,7 @@ public class CameraFollow : MonoBehaviour
             }          
             else { camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, zoomMin, lerpRateZoom); }
             
+            camera.orthographicSize *= zoomScale;
             /*
             if (cameraScale > zoomMin) { camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, cameraScale, lerpRateZoom); }
             else { camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, zoomMin, lerpRateZoom); }
@@ -80,14 +74,10 @@ public class CameraFollow : MonoBehaviour
 
         //(playerManager.avatars[highestPosition].transform.position.x + playerManager.avatars[highestPosition].transform.position.y + playerManager.avatars[lowestPosition].transform.position.x + playerManager.avatars[lowestPosition].transform.position.y) / 4;
 
-        float returnedValue = Mathf.Max
-        ((playerManager.avatars[highestPosition].transform.position.x - playerManager.avatars[lowestPosition].transform.position.x),
-        (playerManager.avatars[highestPosition].transform.position.y - playerManager.avatars[lowestPosition].transform.position.y));
-
-        if (returnedValue == (playerManager.avatars[highestPosition].transform.position.x - playerManager.avatars[lowestPosition].transform.position.x))
-        {
-            //returnedValue *= zoomRate;
-        }
+        float returnedValue = Mathf.Max(
+            (playerManager.avatars[highestPosition].transform.position.x - playerManager.avatars[lowestPosition].transform.position.x),
+            (playerManager.avatars[highestPosition].transform.position.y - playerManager.avatars[lowestPosition].transform.position.y)
+        );
 
         return returnedValue;
     }

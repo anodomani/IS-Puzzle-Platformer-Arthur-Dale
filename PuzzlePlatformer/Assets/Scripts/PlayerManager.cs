@@ -4,92 +4,44 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    //generation variables
-    public GameObject genObject;
-    public GameObject primaryObject;
-    public int avatarAmount;
-    public int avatarsSpawnedAtATime;
+    public static PlayerManager Instance { get; private set; }
     public List<GameObject> avatars = new List<GameObject>();
-    private List<SecondaryMovementController> avatarsMovementControllers = new List<SecondaryMovementController>();
-
-    //gameplay variables
-    //public bool grounded;
-    //public float groundedAvatarMin;
-
-    public Vector3 primaryAdjustedPosition;
+    public List<MovementController> avatarsMovementControllers = new List<MovementController>();
     public Vector3 autoAdjustedPosition;
     public bool mainAvatarRespawn = true;
 
+    public void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Update is called once per frame
     void Update()
-    {
-        //if there are less avatars than the chosen amount to spawn, spawns avatars
-        if (avatars.Count < avatarAmount) 
-        {
-            populate(avatarsSpawnedAtATime);
-        }
-        
-        //spawn in avatars when there are less than the max ammount
-      
+    {    
+
         if (Input.GetAxisRaw("QuickRespawn") != 0) { QuickRespawn(); }
-        //CheckForGrounded();
+        UpdateAvatars();
     }
 
-    public void UpdateAvatars(float h, bool jump)
+    public void UpdateAvatars()
     {
+        // input
+        var h = Input.GetAxisRaw("Horizontal");
+        var jump = Input.GetButtonDown("Jump");
+
         for (int i = 0; i < avatars.Count; i++)
         {
+            //print(avatarsMovementControllers[i]);
             avatarsMovementControllers[i].Update_(h, jump);
         }
-    }
-
-    void populate(int timesToTrigger)
-    {
-        //spawn avatars
-        for (int i = 0; i < timesToTrigger; i++)
-        {
-            float positionRand = Random.Range(-.1f, .1f);
-
-            GameObject newG;
-            newG = Instantiate(genObject, new Vector2(transform.position.x + positionRand, transform.position.y + positionRand), Quaternion.identity, transform);
-            avatars.Add(newG);
-            avatarsMovementControllers.Add(newG.GetComponent<SecondaryMovementController>());
-            newG.name = "Avatar " + avatars.Count;
-        }
-    }
-    /*
-    void CheckForGrounded()
-    {
-        int numberOfAvatarsGrounded = 0;
-        grounded = false;
-        print("grounded " + grounded);
-        for (int i = 0; i < avatars.Count; i++)
-        {
-            if (avatars[i].GetComponent<PlayerController>().grounded)
-            {
-                numberOfAvatarsGrounded++;
-            }
-        }
-        print("number of avatars grounded " + numberOfAvatarsGrounded);
-        if (numberOfAvatarsGrounded > groundedAvatarMin)
-        {
-            grounded = true;
-        }
-
-        print("grounded 2 " + grounded);
-    }
-    */
-
-    public void QuickRespawn()
-    {
-        //respawns an avatar and resets some aspects of it
-        var moveToFirst = avatars[avatars.Count - 1];
-        PlayerController playerController = moveToFirst.GetComponent<PlayerController>();
-        //playerController.primaryByProxy = false;
-        //playerController.primaryConnection = false;
-        moveToFirst.transform.position = transform.position;
-        avatars.RemoveAt(avatars.Count - 1);
-        avatars.Insert(0, moveToFirst);
     }
 
     public Vector3 AutoAdjustPosition()
@@ -105,5 +57,14 @@ public class PlayerManager : MonoBehaviour
 
         //print("auto adjusted pos = " + new Vector3(x / avatars.Count, y / avatars.Count, transform.position.z));
         return new Vector3(x / avatars.Count, y / avatars.Count, transform.position.z);
+    }
+    
+    public void QuickRespawn()
+    {
+        //respawns an avatar at its home spawner
+        var moveToFirst = avatars[avatars.Count - 1];
+        moveToFirst.transform.position = moveToFirst.transform.parent.transform.position;
+        avatars.RemoveAt(avatars.Count - 1);
+        avatars.Insert(0, moveToFirst);
     }
 }

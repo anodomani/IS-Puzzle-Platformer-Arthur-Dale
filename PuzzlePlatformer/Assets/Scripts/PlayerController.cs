@@ -170,7 +170,7 @@ public class PlayerController : MonoBehaviour
         {
             Respawn();
         }
-        if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
+        if (gameObject /*== PrimaryAvatarBehaviour.Instance.primaryAvatar*/)
         {
             Animate();
         }
@@ -181,12 +181,12 @@ public class PlayerController : MonoBehaviour
         //checks if the avatar has come into contact with another controllable avatar
         if (controllable)
         {
-            if (PrimaryAvatarBehaviour.Instance.primaryAvatar == null)
+            if (1 == 1/* && PrimaryAvatarBehaviour.Instance.primaryAvatar == null*/)
             {
                 controllable = false;
             }
 
-            if (gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar || !Input.GetButton("Split"))
+            if (gameObject /*!= PrimaryAvatarBehaviour.Instance.primaryAvatar*/ || !Input.GetButton("Split"))
             {
                 groundHitLong = new RaycastHit2D();
                 groundHitLong = Physics2D.BoxCast(rb.position, new Vector2(1.5f, 1f), 0, Vector2.down, 0.6f, mask.value);
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateControllable()
     {
         if (!playerManager) { controllable = false; }
-        if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
+        if (gameObject/* == PrimaryAvatarBehaviour.Instance.primaryAvatar*/)
         {
             controllable = true;
             playerManager = transform.GetComponentInParent<PlayerManager>();
@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour
         lerp = airControl; // air control
         mat.friction = 0;
 
-        if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar && groundHitLong.collider)
+        if (gameObject/* == PrimaryAvatarBehaviour.Instance.primaryAvatar*/ && groundHitLong.collider)
         {
             //print(groundHitLong.collider.gameObject);
             if (!Input.GetButton("Jump"))
@@ -295,7 +295,7 @@ public class PlayerController : MonoBehaviour
         //jumping if grounded
         if (Input.GetButton("Jump"))
         {
-            if (gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
+            if (gameObject/* == PrimaryAvatarBehaviour.Instance.primaryAvatar*/)
             {
                 if (grounded || groundedByProxy /*|| jumpTicksCurrent > 0*/)
                 {
@@ -324,12 +324,12 @@ public class PlayerController : MonoBehaviour
             //makes an inactive avatar active and adds it to the active avatars list
             if (!playerController.controllable && controllable)
             {
-                playerController.playerManager = PrimaryAvatarBehaviour.Instance.playerManager;
+                /*playerController.playerManager = PrimaryAvatarBehaviour.Instance.playerManager*/;
                 playerController.playerManager.avatars.Add(other.gameObject);
                 playerController.controllable = true;
             }
             //checks if an avatar is connected to the primary avatar or an avatar that is touching it by proxy
-            if (other.gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
+            if (other.gameObject/* == PrimaryAvatarBehaviour.Instance.primaryAvatar*/)
             {
                 primaryConnection = true;
             }
@@ -339,7 +339,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (groundHit.collider && groundHit.collider.tag == "Player" && groundHit.collider.gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar)
+        if (groundHit.collider && groundHit.collider.tag == "Player" && groundHit.collider.gameObject /*!= PrimaryAvatarBehaviour.Instance.primaryAvatar*/)
         {
             groundedByProxy = true;
         }
@@ -353,7 +353,7 @@ public class PlayerController : MonoBehaviour
                 grounded = true;
                 jumpTicksCurrent = jumpTicksMax;
             }
-            else if (playerController != null && other.gameObject != PrimaryAvatarBehaviour.Instance.primaryAvatar)
+            else if (playerController != null && other.gameObject /*!= PrimaryAvatarBehaviour.Instance.primaryAvatar*/)
             {
                 if (playerController.grounded || playerController.groundedByProxy)
                 {

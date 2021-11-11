@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 339460982157810108}
   - component: {fileID: 339460982157810098}
   - component: {fileID: -1492767126641689414}
-  - component: {fileID: -2757436792823135087}
+  - component: {fileID: 3215267803317405890}
   m_Layer: 9
   m_Name: Avatar
   m_TagString: Player
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 8
@@ -122,7 +122,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.15
---- !u!114 &-2757436792823135087
+--- !u!114 &3215267803317405890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 339460982157810096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1727d75e83696942a81027b2c73b7cf, type: 3}
+  m_Script: {fileID: 11500000, guid: ee32da5d195c3304ea2073c21c582fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   hideCursor: 1
@@ -140,7 +140,17 @@ MonoBehaviour:
     m_Bits: 1024
   maskPlayer:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 768
+  primaryAvatar: 0
+  canAnimate: 0
+  active: 0
+  speed: 15
+  jumpSpeed: 15
+  gravityScale: 8
+  airControl: 3
+  groundControl: 10
+  maxSpeed: 40
+  animate: {fileID: 0}
 --- !u!1 &1518322445838901982
 GameObject:
   m_ObjectHideFlags: 0

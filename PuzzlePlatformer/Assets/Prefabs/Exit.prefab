@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6764365523914076035
 Transform:
   m_ObjectHideFlags: 0
@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c8f90e4348738a4081cc92b26ccee26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pull: 0
 --- !u!1 &7326401704528974944
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +143,11 @@ MonoBehaviour:
   avatars: []
   textLevelDescription: {fileID: 0}
   levelCompleteText: 
+  timeBeforeKill: 0
+  delay: 0
+  sceneName: 
+  allowedToSwitchScenes: 0
+  reload: 0
 --- !u!58 &7326401704528974972
 CircleCollider2D:
   m_ObjectHideFlags: 0

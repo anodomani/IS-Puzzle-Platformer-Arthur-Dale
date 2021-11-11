@@ -14,16 +14,26 @@ public class ExitBehaviour : MonoBehaviour
     public string sceneName;
     public bool allowedToSwitchScenes;
     public bool reload = false;
+    public LayerMask mask;
 
     private GameObject killTarget;
 
-    void update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
             reload = true;
             Load();
         }
+    }
+
+    void FixedUpdate()
+    {
+        RaycastHit2D playerHit;
+        /*
+        playerHit = Physics2D.CircleCast(transform.position, 2.5f, Vector2.down, 0.1f, mask.value);
+        if (playerHit.collider != false) { print("YOWZA"); AddToContents(playerHit.collider.gameObject); }
+        */
     }
 
     public void Load()
@@ -37,42 +47,30 @@ public class ExitBehaviour : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnDrawGizmos()
     {
-        AddToContents(other);
+        Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0, 0), 2.5f);
     }
 
-    void AddToContents(Collider2D other)
+    void OnTriggerEnter2D(Collision2D other)
     {
-        //contents++;
-        if (other.tag == "Player")
-        {
-            if (other.gameObject == PrimaryAvatarBehaviour.Instance.primaryAvatar)
-            {
-                textLevelDescription.text = levelCompleteText;
-                PrimaryAvatarBehaviour.Instance.playerManager.mainAvatarRespawn = false;
-                Invoke("Load", delay);
-            }
-            //PlayerController playerController = other.GetComponent<PlayerController>();
-            //playerController.Respawn();
-            killTarget = other.gameObject;
-            Kill(other.gameObject);
-        }
+        AddToContents(other.gameObject);
     }
 
-    void Kill(GameObject other)
+    void AddToContents(GameObject other)
     {
-        PlayerController playerController = other.GetComponent<PlayerController>();
+        MovementController movementController = other.GetComponent<MovementController>();
 
-        if (other == PrimaryAvatarBehaviour.Instance.primaryAvatar)
+        if (movementController.primaryAvatar)
         {
-            playerController.playerManager.mainAvatarRespawn = false;
-            playerController.playerManager.avatars.Remove(other.gameObject);
+            PlayerManager.Instance.avatars.Remove(other);
+            PlayerManager.Instance.avatarsMovementControllers.Remove(other.GetComponent<MovementController>());
+            //playerController.playerManager.avatars.Remove(other.gameObject);
             Destroy(other.gameObject);
         }
         else
         {
-            playerController.playerManager.QuickRespawn();
+            PlayerManager.Instance.QuickRespawn();
         }
     }
 }

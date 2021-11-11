@@ -9,12 +9,12 @@ public class SecondaryMovementController : MonoBehaviour
     public LayerMask maskGround = 1;
     public LayerMask maskPlayer = 1;
 
-    const float speed = 15;
-    const float jumpSpeed = 25;
-    const float gravityScale = 8;
-    const float airControl = 3;
-    const float groundControl = 10;
-    const float maxSpeed = 40;
+    public float speed = 15;
+    public float jumpSpeed = 25;
+    public float gravityScale = 8;
+    public float airControl = 3;
+    public float groundControl = 10;
+    public float maxSpeed = 40;
 
     float h, flip, velocityX, lerp;
     bool active = false;
@@ -50,7 +50,6 @@ public class SecondaryMovementController : MonoBehaviour
     // Update is called once per frame
     public void Update_(float hNew, bool jumpNew)
     {
-        print("updating");
         h = hNew;
         lerp = airControl; // air control
         mat.friction = 0;
