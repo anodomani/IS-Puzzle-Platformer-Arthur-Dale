@@ -8,7 +8,7 @@ public class ParalaxBehaviour : MonoBehaviour
     private Vector2 dimensions;
     private Vector2 startPos;
     public float parallaxEffect;
-    public GameObject camera;
+    public GameObject cam;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class ParalaxBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 temp = new Vector2(camera.transform.position.x, camera.transform.position.y) * parallaxEffect;
+        Vector2 temp = new Vector2(cam.transform.position.x, cam.transform.position.y) * parallaxEffect;
 
         transform.position = temp;
         if (temp.x > startPos.x + dimensions.x) { startPos += new Vector2(dimensions.x, 0); }

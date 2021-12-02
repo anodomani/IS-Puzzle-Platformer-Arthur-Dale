@@ -10,12 +10,12 @@ public class CameraFollow : MonoBehaviour
     public float zoomMin;
     public float zoomMax;
     public float zoomScale;
-    Camera camera;
+    Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
     }
 
     void FixedUpdate()
@@ -28,29 +28,34 @@ public class CameraFollow : MonoBehaviour
             
             if (cameraScale > zoomMin) 
             {        
-                if (cameraScale > zoomMax) { camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, zoomMax, lerpRateZoom); }
-                else { camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, cameraScale, lerpRateZoom); }
+                if (cameraScale > zoomMax) { cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, zoomMax, lerpRateZoom); }
+                else { cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, cameraScale, lerpRateZoom); }
             }          
-            else { camera.orthographicSize = Mathf.Lerp(camera.orthographicSize, zoomMin, lerpRateZoom); }
+            else { cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, zoomMin, lerpRateZoom); }
             
-            camera.orthographicSize *= zoomScale;
+            cam.orthographicSize *= zoomScale;
             /*
-            if (cameraScale > zoomMin) { camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, cameraScale, lerpRateZoom); }
-            else { camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, zoomMin, lerpRateZoom); }
+            if (cameraScale > zoomMin) { cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, cameraScale, lerpRateZoom); }
+            else { cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, zoomMin, lerpRateZoom); }
             */
         }
     }
 
     Vector3 AutoAdjustPosition()
     {
+        int activeAvatars = 0;
         float x = 0;
         float y = 0;
         for (int i = 0; i < playerManager.avatars.Count; i++)
         {
-            x += playerManager.avatars[i].transform.position.x;
-            y += playerManager.avatars[i].transform.position.y;
+            if (playerManager.avatarsMovementControllers[i].active)
+            {
+                x += playerManager.avatars[i].transform.position.x;
+                y += playerManager.avatars[i].transform.position.y;
+                activeAvatars++;
+            }
         }
-        return new Vector3(x / playerManager.avatars.Count, y / playerManager.avatars.Count, transform.position.z);
+        return new Vector3(x / activeAvatars, y / activeAvatars, transform.position.z);
     }
 
     float FindFurthestAvatars()
@@ -60,15 +65,18 @@ public class CameraFollow : MonoBehaviour
         int lowestPosition = 0;
 
         for (int i = 0; i < playerManager.avatars.Count; i++)
-        {
-            if ((playerManager.avatars[i].transform.position.x + playerManager.avatars[i].transform.position.y) > (playerManager.avatars[highestPosition].transform.position.x + playerManager.avatars[highestPosition].transform.position.y))
+        {   
+            if (playerManager.avatarsMovementControllers[i].active == true)
             {
-                highestPosition = i;
-            }
+                if ((playerManager.avatars[i].transform.position.x + playerManager.avatars[i].transform.position.y) > (playerManager.avatars[highestPosition].transform.position.x + playerManager.avatars[highestPosition].transform.position.y))
+                {
+                    highestPosition = i;
+                }
 
-            if ((playerManager.avatars[i].transform.position.x + playerManager.avatars[i].transform.position.y) < (playerManager.avatars[lowestPosition].transform.position.x + playerManager.avatars[lowestPosition].transform.position.y))
-            {
-                lowestPosition = i;
+                if ((playerManager.avatars[i].transform.position.x + playerManager.avatars[i].transform.position.y) < (playerManager.avatars[lowestPosition].transform.position.x + playerManager.avatars[lowestPosition].transform.position.y))
+                {
+                    lowestPosition = i;
+                }
             }
         }
 

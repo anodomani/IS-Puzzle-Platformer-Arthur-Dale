@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4255716605163385751}
   - component: {fileID: 4255716605163385750}
   - component: {fileID: 4255716605163385745}
-  - component: {fileID: 4255716605163385748}
+  - component: {fileID: 4962675034764505113}
   m_Layer: 0
   m_Name: Terrain Shape
   m_TagString: ground
@@ -71,9 +71,9 @@ SpriteShapeRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1442800325
-  m_SortingLayer: -4
+  m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Color: {r: 0.38915092, g: 0.4286374, b: 0.5188679, a: 1}
+  m_Color: {r: 0.22227661, g: 0.28356495, b: 0.4245283, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: ce04a2b8749e41348ba71fab830b31e3, type: 3}
   m_Sprites:
@@ -158,8 +158,8 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
---- !u!68 &4255716605163385748
-EdgeCollider2D:
+--- !u!60 &4962675034764505113
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -172,12 +172,19 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: 24.47974, y: 17.864351}
-  - {x: 24.076077, y: 4.8166437}
-  - {x: 16.947443, y: 4.6283374}
-  - {x: 15.500121, y: 17.428877}
-  - {x: 23.485151, y: 17.816116}
-  - {x: 23.576723, y: 17.820557}
-  - {x: 24.47974, y: 17.864351}
+    m_Paths:
+    - - {x: 12.641529, y: 21.967154}
+      - {x: 0.61872005, y: 13.232071}
+      - {x: 5.2110257, y: -0.90158844}
+      - {x: 20.072035, y: -0.90158653}
+      - {x: 24.664337, y: 13.232073}

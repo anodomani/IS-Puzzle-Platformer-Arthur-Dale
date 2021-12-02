@@ -1,18 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject MainMenuCanvas;
+    public GameObject CreditsCanvas;
+
+    public string sceneName;
+
+    public void Credits()
     {
-        
+        MainMenuCanvas.SetActive(false);
+        CreditsCanvas.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGame()
     {
-        
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ReturnToMain()
+    {
+        MainMenuCanvas.SetActive(true);
+        CreditsCanvas.SetActive(false);
     }
 }

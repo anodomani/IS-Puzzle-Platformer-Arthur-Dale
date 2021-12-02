@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     float h, flip, velocityX, lerp;
     Vector2 velocity;
-    Vector3 flipScale = new Vector3();
+    //Vector3 flipScale = new Vector3();
     RaycastHit2D groundHit;
     RaycastHit2D groundHitLong;
     Rigidbody2D rb;
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
         }
         if (gameObject /*== PrimaryAvatarBehaviour.Instance.primaryAvatar*/)
         {
-            Animate();
+            //Animate();
         }
     }
 
@@ -269,7 +269,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    /*
     void Animate()
     {
         if (Input.GetButton("Split")) { animate.PlayAnimation("Focus"); }
@@ -277,6 +277,7 @@ public class PlayerController : MonoBehaviour
         else if (!grounded) { animate.PlayAnimation("Jump"); }
         else { animate.PlayAnimation("Idle"); }
     }
+    */
 
     void FixedUpdateMovementHandler()
     {

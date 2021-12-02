@@ -9,6 +9,7 @@ public class SpawnerBehaviour : MonoBehaviour
     public int avatarAmount;
     public int avatarsSpawnedAtATime;
     public List<GameObject> avatars = new List<GameObject>();
+    public List<MovementController> avatarsMovementControllers = new List<MovementController>();
 
     // Start is called before the first frame update
     void Start()
@@ -32,10 +33,13 @@ public class SpawnerBehaviour : MonoBehaviour
         for (int i = 0; i < timesToTrigger; i++)
         {
             float positionRand = Random.Range(-.1f, .1f);
-
             GameObject newG;
             newG = Instantiate(genObject, new Vector2(transform.position.x + positionRand, transform.position.y + positionRand), Quaternion.identity, transform);
+            MovementController movementController = newG.GetComponent<MovementController>();
             avatars.Add(newG);
+            avatarsMovementControllers.Add(movementController);
+            PlayerManager.Instance.avatars.Add(newG);
+            PlayerManager.Instance.avatarsMovementControllers.Add(movementController);
             newG.name = "Avatar " + avatars.Count;
         }
     }

@@ -12,6 +12,10 @@ public class MovementController : MonoBehaviour
     public bool canAnimate;
     public bool active = false;
 
+    public int layerDefault;
+    public int layerIgnorePlatform;
+    public int layerInactive;
+
     public float speed = 15;
     public float jumpSpeed = 25;
     public float gravityScale = 8;
@@ -19,11 +23,15 @@ public class MovementController : MonoBehaviour
     public float groundControl = 10;
     public float maxSpeed = 40;
 
-    float h, flip, velocityX, lerp;
+    public float awakenRange = 1;
+    public float h;
+
+    float v, velocityX, lerp;
     Vector2 velocity;
-    Vector3 flipScale = new Vector3();
+    //Vector3 flipScale = new Vector3();
     Collider2D groundHit;
-    RaycastHit2D checkForActiveNearby;
+    //RaycastHit2D checkForActiveNearby;
+    Collider2D checkForActiveNearby;
     Rigidbody2D rb;
     PhysicsMaterial2D mat;
     SpriteRenderer spriteRenderer;
@@ -41,7 +49,7 @@ public class MovementController : MonoBehaviour
         rb.sharedMaterial = mat;
         spriteRenderer = GetComponent<SpriteRenderer>();
         Cursor.visible = !hideCursor;
-        InvokeRepeating("Clock", Random.Range(0f, 1f), 0.1f);
+        if (primaryAvatar) { InvokeRepeating("Clock", 0, 0.1f); }
     }
 
     // Start is called before the first frame update
@@ -57,10 +65,11 @@ public class MovementController : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void Update_(float hNew, bool jumpNew)
+    public void Update_(float hNew, float vNew, bool jumpNew)
     {
         if (active)
         {
+            v = vNew;
             h = hNew;
             var interrupt = Input.GetButton("Split");
             var jump = jumpNew;
@@ -72,28 +81,27 @@ public class MovementController : MonoBehaviour
             {
                 lerp = groundControl;
                 mat.friction = 1;
-                if (jump) { rb.velocity += Vector2.up * jumpSpeed; }
+                if (primaryAvatar && jump && !interrupt) { rb.velocity += Vector2.up * jumpSpeed; }
+                else if (!primaryAvatar && jump) { rb.velocity += Vector2.up * jumpSpeed; }
             }
 
-            // flip sprite
-            if (Mathf.Abs(h) > 0.01f)
-            {
-                spriteRenderer.flipX = h < 0f;
-            }
+            if (v < 0) { gameObject.layer = layerIgnorePlatform; }
+            else { gameObject.layer = layerDefault; }
 
             if (canAnimate)
             {
-                if (Input.GetButton("Split")) { animate.PlayAnimation("Focus"); }
-                else if (groundHit && h != 0) { animate.PlayAnimation("Run"); }
-                else if (!groundHit) { animate.PlayAnimation("Jump"); }
-                else { animate.PlayAnimation("Idle"); }
+                if (Input.GetButton("Split")) { animate.PlayAnimation("Focus", h); }
+                else if (groundHit && h != 0) { animate.PlayAnimation("Run", h); }
+                else if (!groundHit) { animate.PlayAnimation("Jump", h); }
+                else { animate.PlayAnimation("Idle", h); }
             }
         }
+        else { gameObject.layer = layerInactive; }
     }
 
     void FixedUpdate()
     {
-        groundHit = Physics2D.OverlapCircle(rb.position + new Vector2(0, 0.4f), 0.4f, maskGround.value);
+        groundHit = Physics2D.OverlapCircle(rb.position - new Vector2(0, 0.1f), 0.3f, maskGround.value);
 
         //if (Physics2D.Linecast(rb.position - Vector2.right * 0.7f, rb.position + Vector2.right * 0.7f, mask.value)) { h *= 0.2f; }
 
@@ -112,20 +120,33 @@ public class MovementController : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0.2f, 0), 0.4f);
-        Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0.1f, 0), 3f);
+        Gizmos.DrawWireSphere(transform.position - new Vector3(0, 0.1f, 0), 0.3f);
+        if (primaryAvatar) { Gizmos.DrawWireSphere(transform.position + new Vector3(0, 0.1f, 0), awakenRange); }
     }
 
     void Clock()
     {
-        checkForActiveNearby = Physics2D.CircleCast(rb.position + new Vector2(0, 0), 3f, Vector2.up, 0.1f, maskPlayer.value);
-        if (!active)
+        //print(Physics2D.OverlapCircleAll(rb.position + new Vector2(0, 0), 10f, maskPlayer.value).Length);
+        checkForActiveNearby = Physics2D.OverlapCircle(rb.position + new Vector2(0, 0), awakenRange, maskPlayer.value);
+        //checkForActiveNearby = Physics2D.CircleCast(rb.position + new Vector2(0, 1f), 10, Vector2.down, 1f, maskPlayer.value);
+        if (active && primaryAvatar)
         {
-            if (checkForActiveNearby.collider != null && checkForActiveNearby.collider.GetComponent<MovementController>().active)
+            if (checkForActiveNearby != null)
             {
-                active = true;
-                PlayerManager.Instance.avatars.Add(gameObject);
-                PlayerManager.Instance.avatarsMovementControllers.Add(gameObject.GetComponent<MovementController>());
+                if(checkForActiveNearby.GetComponent<MovementController>() != null && !checkForActiveNearby.GetComponent<MovementController>().active)
+                {
+                    SpawnerBehaviour spawnerBehaviourOtherParent = checkForActiveNearby.GetComponentInParent<SpawnerBehaviour>();
+                    for (int i = 0; i < spawnerBehaviourOtherParent.avatarsMovementControllers.Count; i++)     
+                    {
+                        spawnerBehaviourOtherParent.avatarsMovementControllers[i].active = true;
+                    }
+                    /*
+                    PlayerManager.Instance.avatars.Add(checkForActiveNearby.collider.gameObject);
+                    MovementController movementControllerNearby = checkForActiveNearby.collider.gameObject.GetComponent<MovementController>();
+                    PlayerManager.Instance.avatarsMovementControllers.Add(movementControllerNearby);
+                    movementControllerNearby.active = true;
+                    */
+                }
             }
         }
     }

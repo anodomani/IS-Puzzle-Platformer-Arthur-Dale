@@ -19,7 +19,7 @@ public class SecondaryMovementController : MonoBehaviour
     float h, flip, velocityX, lerp;
     bool active = false;
     Vector2 velocity;
-    Vector3 flipScale = new Vector3();
+    //Vector3 flipScale = new Vector3();
     RaycastHit2D groundHit, checkForActiveNearby;
     Rigidbody2D rb;
     PhysicsMaterial2D mat;

@@ -29,8 +29,9 @@ public class ExitBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        RaycastHit2D playerHit;
         /*
+        RaycastHit2D playerHit;
+        
         playerHit = Physics2D.CircleCast(transform.position, 2.5f, Vector2.down, 0.1f, mask.value);
         if (playerHit.collider != false) { print("YOWZA"); AddToContents(playerHit.collider.gameObject); }
         */
@@ -63,11 +64,13 @@ public class ExitBehaviour : MonoBehaviour
 
         if (movementController.primaryAvatar)
         {
+            Load();
+            /*
             PlayerManager.Instance.avatars.Remove(other);
             PlayerManager.Instance.avatarsMovementControllers.Remove(other.GetComponent<MovementController>());
             //playerController.playerManager.avatars.Remove(other.gameObject);
             Destroy(other.gameObject);
-            Load();
+            */
         }
         else
         {

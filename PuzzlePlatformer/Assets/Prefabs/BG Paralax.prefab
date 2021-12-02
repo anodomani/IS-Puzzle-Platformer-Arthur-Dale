@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 971269402}
   - component: {fileID: 971269404}
   - component: {fileID: 971269403}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BG5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e92a5814d22d1584ab22588fc7a687b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleWithCamera: 0
   parallaxEffect: 1
-  camera: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!1 &1072430816060862148
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 1072430816060862170}
   - component: {fileID: 1072430816060862149}
   - component: {fileID: 1072430816060862171}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BG1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e92a5814d22d1584ab22588fc7a687b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1367670533
-  m_SortingLayer: -5
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 97bbce32ae740534a935bf256ffe7276, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleWithCamera: 0
   parallaxEffect: 1
-  camera: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!1 &1072430816478367173
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 1072430816478367192}
   - component: {fileID: 1072430816478367195}
   - component: {fileID: 1072430816478367194}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BG2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e92a5814d22d1584ab22588fc7a687b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -263,7 +263,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1367670533
-  m_SortingLayer: -5
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0dac400e1568c6342ab0c89edead89c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleWithCamera: 0
   parallaxEffect: 0.8
-  camera: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!1 &1072430816702176361
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 1072430816702176364}
   - component: {fileID: 1072430816702176367}
   - component: {fileID: 1072430816702176366}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BG3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e92a5814d22d1584ab22588fc7a687b8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -360,7 +360,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1367670533
-  m_SortingLayer: -5
+  m_SortingLayer: -3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2cb04663f726f8b439974dd44a31d1f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleWithCamera: 0
   parallaxEffect: 0.5
-  camera: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!1 &2852332148404188944
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8866114457572653097}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BG Paralax
   m_TagString: Untagged
   m_Icon: {fileID: 0}

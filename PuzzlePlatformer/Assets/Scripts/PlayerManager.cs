@@ -22,10 +22,15 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        avatars.Clear();
+        avatarsMovementControllers.Clear();
+    }
+
     // Update is called once per frame
     void Update()
     {    
-
         if (Input.GetAxisRaw("QuickRespawn") != 0) { QuickRespawn(); }
         UpdateAvatars();
     }
@@ -35,11 +40,12 @@ public class PlayerManager : MonoBehaviour
         // input
         var h = Input.GetAxisRaw("Horizontal");
         var jump = Input.GetButtonDown("Jump");
+        var v = Input.GetAxisRaw("Vertical");
 
         for (int i = 0; i < avatars.Count; i++)
         {
             //print(avatarsMovementControllers[i]);
-            avatarsMovementControllers[i].Update_(h, jump);
+            avatarsMovementControllers[i].Update_(h, v, jump);
         }
     }
 

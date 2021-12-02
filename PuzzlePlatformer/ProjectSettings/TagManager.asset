@@ -17,9 +17,9 @@ TagManager:
   - AvatarPrimary
   - AvatarSecondary
   - Ground
-  - 
-  - 
-  - 
+  - IgnoreOneWay
+  - InactiveAvatar
+  - Background
   - 
   - 
   - 
@@ -45,14 +45,8 @@ TagManager:
   - name: Background
     uniqueID: 1442800325
     locked: 0
-  - name: Player
+  - name: Midground
     uniqueID: 2887604629
-    locked: 0
-  - name: Physics Object
-    uniqueID: 4011929633
-    locked: 0
-  - name: Liquid
-    uniqueID: 3699233485
     locked: 0
   - name: Default
     uniqueID: 0
